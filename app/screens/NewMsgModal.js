@@ -8,7 +8,7 @@ import {
 	Text,
 } from 'react-native';
 
-function NewMsgModal({ modalVisible, setModalVisible, fetchMessages }) {
+function NewMsgModal({ modalVisible, setModalVisible, setMessages }) {
 	const url = 'https://message-board-db.herokuapp.com/api/messages';
 	const [message, setMessage] = useState('');
 	const [subject, setSubject] = useState('');
@@ -25,9 +25,9 @@ function NewMsgModal({ modalVisible, setModalVisible, fetchMessages }) {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({ subject: subject, message: message }),
-			}).then(() => {
+			}).then(res => res.json()).then((res) => {
 				clearInputs();
-				fetchMessages();
+				setMessages([...res])
 			});
 		}
 	};

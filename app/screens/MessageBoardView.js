@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Text, StyleSheet, ScrollView, View, TouchableOpacity } from 'react-native';
 import NewMsgModal from './NewMsgModal';
 import moment from 'moment';
-function MessageBoardView({ messages, fetchMessages }) {
+function MessageBoardView({ messages, setMessages }) {
     const [modalVisible, setModalVisible] = useState(false);
     const scrollViewRef = useRef();
 	return (
@@ -42,7 +42,7 @@ function MessageBoardView({ messages, fetchMessages }) {
 				<NewMsgModal
 					modalVisible={modalVisible}
 					setModalVisible={setModalVisible}
-					fetchMessages={fetchMessages}
+					setMessages={setMessages}
 				/>
 			</ScrollView>
 		</View>

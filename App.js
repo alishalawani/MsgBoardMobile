@@ -11,7 +11,7 @@ import MessageBoardView from './app/screens/MessageBoardView';
 export default function App() {
 	const url = 'https://message-board-db.herokuapp.com/api/messages';
 	const [messages, setMessages] = useState([]);
-	const fetchMessages = () => {
+	useEffect(() => {
 		fetch(url)
 			.then((res) => res.json())
 			.then((res) => {
@@ -20,15 +20,12 @@ export default function App() {
 			.catch((error) => {
 				console.log(error);
 			});
-	};
-	useEffect(() => {
-		fetchMessages();
 	}, []);
 
 	return (
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.heading}>PnT Message Board</Text>
-			<MessageBoardView messages={messages} fetchMessages={fetchMessages} />
+			<MessageBoardView messages={messages} setMessages={setMessages} />
 		</SafeAreaView>
 	);
 }
