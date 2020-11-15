@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Modal, TextInput, StyleSheet, View, Text } from 'react-native';
+import {
+	TouchableOpacity,
+	Modal,
+	TextInput,
+	StyleSheet,
+	View,
+	Text,
+} from 'react-native';
 
 function NewMsgModal({ modalVisible, setModalVisible, fetchMessages }) {
 	const url = 'https://message-board-db.herokuapp.com/api/messages';
@@ -42,19 +49,21 @@ function NewMsgModal({ modalVisible, setModalVisible, fetchMessages }) {
 					value={message}
 				/>
 				<View style={styles.buttonsContainer}>
-					<Button
-						title='send'
+					<TouchableOpacity
+						style={styles.postButton}
 						onPress={() => {
 							handleSend();
-						}}
-					/>
-					<Button
-						title='cancel'
+						}}>
+						<Text>Post</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={styles.cancelButton}
 						onPress={() => {
 							clearInputs();
 							setModalVisible(false);
-						}}
-					/>
+						}}>
+						<Text>Cancel</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</Modal>
@@ -80,9 +89,9 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		width: '100%',
 		marginBottom: 20,
-        borderRadius: 15,
-        paddingRight:20,
-        paddingLeft:20,
+		borderRadius: 15,
+		paddingRight: 20,
+		paddingLeft: 20,
 	},
 	label: {
 		fontWeight: 'bold',
@@ -93,5 +102,19 @@ const styles = StyleSheet.create({
 	buttonsContainer: {
 		display: 'flex',
 		flexDirection: 'row',
+	},
+	postButton: {
+		backgroundColor: 'dodgerblue',
+		color: 'white',
+		paddingVertical: 10,
+		paddingHorizontal: 20,
+		marginRight: 30,
+		borderRadius: 10,
+	},
+	cancelButton: {
+		backgroundColor: 'dodgerblue',
+		color: 'white',
+		padding: 10,
+		borderRadius: 10,
 	},
 });

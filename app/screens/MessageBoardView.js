@@ -1,24 +1,49 @@
-import React, {useState} from 'react';
-import { Text, StyleSheet, ScrollView, View, Button } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { Text, StyleSheet, ScrollView, View, TouchableOpacity } from 'react-native';
 import NewMsgModal from './NewMsgModal';
+import moment from 'moment';
 function MessageBoardView({ messages, fetchMessages }) {
     const [modalVisible, setModalVisible] = useState(false);
+    const scrollViewRef = useRef();
 	return (
-		<View style={{marginTop:100}}>
-			<Button title=' + New Message' style={styles.button} onPress={()=>{
-                setModalVisible(true);
-            }} />
-			<ScrollView>
+		<View style={{ marginTop: 100, paddingBottom: 40, flex: 1 }}>
+			
+			<TouchableOpacity
+				style={styles.button}
+				onPress={() => {
+					setModalVisible(true);
+				}}>
+				<Text style={{ color: 'white', fontWeight: 'bold' }}>
+					+ New Message
+				</Text>
+			</TouchableOpacity>
+			<ScrollView
+				ref={scrollViewRef}
+				onContentSizeChange={() =>
+					scrollViewRef.current.scrollToEnd({ animated: true })
+				}>
 				<View style={styles.container}>
 					{messages ? (
-						messages.map((message) => {
-							return <Text style={styles.text}>{message.message}</Text>;
+						messages.map((message, index) => {
+							return (
+								<View style={{ width: '90%' }} key={index}>
+									<Text>
+										{moment(message['created_at']).startOf('hour').fromNow()}
+									</Text>
+									<Text style={styles.subject}>{message.subject}</Text>
+									<Text style={styles.text}>{message.message}</Text>
+								</View>
+							);
 						})
 					) : (
 						<Text style={styles.text}>Messages loading...</Text>
 					)}
 				</View>
-                <NewMsgModal modalVisible={modalVisible} setModalVisible={setModalVisible} fetchMessages={fetchMessages}/>
+				<NewMsgModal
+					modalVisible={modalVisible}
+					setModalVisible={setModalVisible}
+					fetchMessages={fetchMessages}
+				/>
 			</ScrollView>
 		</View>
 	);
@@ -28,17 +53,32 @@ export default MessageBoardView;
 const styles = StyleSheet.create({
 	text: {
 		color: 'black',
-		padding: 20,
+		padding: 10,
 		backgroundColor: 'dodgerblue',
-		marginTop: 20,
-		width: '90%',
+		marginBottom: 20,
+        width: '100%',
+        fontSize:16,
 	},
 	container: {
+        flex:1,
 		width: '100%',
 		alignItems: 'center',
-		justifyContent: 'center',
+        justifyContent: 'center',
+        marginBottom:'10%',
+	},
+	button: {
+        marginBottom:30,
+        alignSelf:'flex-start',
+        marginLeft:'10%',
+        backgroundColor:'dodgerblue',
+        padding:15,
+        borderRadius:15,
     },
-    button:{
-        marginTop:40,
+    subject:{
+        backgroundColor:'rgb(9,90,900)',
+        padding:5,
+        color:'white',
+        fontSize:16,
+        fontWeight:'bold',
     }
 });
