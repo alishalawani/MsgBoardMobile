@@ -3,6 +3,11 @@
 ## A Simple Message Board Mobile App
 
 ### Running the app
+Install dependencies by running
+```
+npm i
+```
+Start app and Metro Bundler by running
 ```
 expo start
 ```
