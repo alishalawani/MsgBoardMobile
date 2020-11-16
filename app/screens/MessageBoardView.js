@@ -28,7 +28,7 @@ function MessageBoardView({ messages, setMessages }) {
 							return (
 								<View style={{ width: '90%' }} key={index}>
 									<Text>
-										{moment(message['created_at']).startOf('hour').fromNow()}
+										{moment(message['created_at']).startOf('day').fromNow()}
 									</Text>
 									<Text style={styles.subject}>{message.subject}</Text>
 									<Text style={styles.text}>{message.message}</Text>

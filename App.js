@@ -24,7 +24,7 @@ export default function App() {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.heading}>PnT Message Board</Text>
+			<Text style={styles.heading}>Message Board</Text>
 			<MessageBoardView messages={messages} setMessages={setMessages} />
 		</SafeAreaView>
 	);
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		marginTop: 20,
 		marginBottom: -40,
-    fontWeight: 'bold',
-    color:'blue',
+		fontWeight: 'bold',
+		color: 'rgb(44, 150, 62)',
 	},
 });
