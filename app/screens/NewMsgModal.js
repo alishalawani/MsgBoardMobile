@@ -6,6 +6,8 @@ import {
 	StyleSheet,
 	View,
 	Text,
+	KeyboardAvoidingView,
+	Platform,
 } from 'react-native';
 
 function NewMsgModal({ modalVisible, setModalVisible, setMessages }) {
@@ -34,7 +36,9 @@ function NewMsgModal({ modalVisible, setModalVisible, setMessages }) {
 
 	return (
 		<Modal animationType='slide' visible={modalVisible}>
-			<View style={styles.modalView}>
+			<KeyboardAvoidingView
+				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+				style={styles.modalView}>
 				<Text style={styles.header}>Create Your Message</Text>
 				<Text style={styles.label}>Subject</Text>
 				<TextInput
@@ -65,7 +69,7 @@ function NewMsgModal({ modalVisible, setModalVisible, setMessages }) {
 						<Text>Cancel</Text>
 					</TouchableOpacity>
 				</View>
-			</View>
+			</KeyboardAvoidingView>
 		</Modal>
 	);
 }
