@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { Text, StyleSheet, ScrollView, View, TouchableOpacity } from 'react-native';
 import NewMsgModal from './NewMsgModal';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 function MessageBoardView({ messages, setMessages }) {
     const [modalVisible, setModalVisible] = useState(false);
-    const scrollViewRef = useRef();
+	const scrollViewRef = useRef();
+	dayjs.extend(relativeTime);
 	return (
 		<View style={{ marginTop: 100, paddingBottom: 40, flex: 1 }}>
 			
@@ -27,9 +29,7 @@ function MessageBoardView({ messages, setMessages }) {
 						messages.map((message, index) => {
 							return (
 								<View style={{ width: '90%' }} key={index}>
-									<Text>
-										{moment(message['created_at']).startOf('day').fromNow()}
-									</Text>
+									<Text>{dayjs(message['created_at']).fromNow()}</Text>
 									<Text style={styles.subject}>{message.subject}</Text>
 									<Text style={styles.text}>{message.message}</Text>
 								</View>
