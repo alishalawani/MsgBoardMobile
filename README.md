@@ -17,5 +17,3 @@ expo start
 - Cancel and exit modal
 - Scroll through messages
 
-## Grows
-- The keyboard needs to be prevented from covering the message input on ios.
