@@ -44,7 +44,7 @@ function NewMsgModal({ modalVisible, setModalVisible, setMessages }) {
 				<TextInput
 					style={styles.textBox}
 					onChangeText={(text) => setSubject(text)}
-					value={subject}
+					value={subject} 
 				/>
 				<Text style={styles.label}>Message</Text>
 				<TextInput
